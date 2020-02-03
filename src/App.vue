@@ -8,11 +8,23 @@
 <script lang="ts">
 import Vue from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import Web3 from "web3";
+const WalletConnectProvider = require("@walletconnect/web3-provider").default;
 
 export default Vue.extend({
   name: "app",
   components: {
     HelloWorld
+  },
+  async mounted() {
+    console.log(WalletConnectProvider);
+    const provider = new WalletConnectProvider({
+      infuraId: "hoge" // Required
+    });
+
+    //  Enable session (triggers QR Code modal)
+    await provider.enable();
+    console.log(new Web3(provider));
   }
 });
 </script>
